@@ -1,10 +1,12 @@
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
 
-        prevMap = {}
+        res = defaultdict(list)
 
-        for i, n in enumerate(nums):
-            diff = target - n
-            if diff in prevMap:
-                return [prevMap[diff], i]
-            prevMap[n] = i
+        for s in strs:
+
+            count = [0] * 26
+            for c in s:
+                count[ord(c) - ord('a')] += 1
+            res[tuple(count)].append(s)
+        return list(res.values())
